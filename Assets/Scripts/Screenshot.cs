@@ -4,33 +4,75 @@ using UnityEngine;
 
 public class Screenshot : MonoBehaviour
 {
-  void TakeScreenshot(string fullPath)
+
+    public List<GameObject> sceneObjects;
+    public List<InventoryItemData> dataObjects;
+
+    private void Awake()
     {
-        if (GetComponent<Camera>() == null)
-        {
-            camera = GetComponent<Camera>();
-        }
+        camera = GetComponent<Camera>();
+    }
 
-        RenderTexture rt = new RenderTexture(256, 256, 24);
-        GetComponent<Camera>().targetTexture = rt;
-        Texture2D screenShot = new Texture2D(256, 256, TextureFormat.RGBA32, false);
-        GetComponent<Camera>().Render();
-        RenderTexture.active = rt;
-        screenShot.ReadPixels(new Rect(0, 0, 256, 256), 0, 0);
-        GetComponent<Camera>().targetTexture = null;
-        RenderTexture.active = null;
+    [ContextMenu("Screenshot")]
+    private void ProcessScreenshots()
+    {
+        StartCoroutine(Screenshot());
+    }
 
-        if (Application.isEditor)
+    void TakeScreenshot(string fullPath)
         {
-            DestroyImmediate(rt);
-        }
-        else
-        {
-            Destroy(rt);
-        }
+            if (GetComponent<Camera>() == null)
+            {
+                camera = GetComponent<Camera>();
+            }
 
-        byte[] bytes = screenShot.EncodeToPNG();
-        System.IO.File.WriteAllBytes(fullPath, bytes);
-        AssetDatabase.Refresh();
+            RenderTexture rt = new RenderTexture(256, 256, 24);
+            GetComponent<Camera>().targetTexture = rt;
+            Texture2D screenShot = new Texture2D(256, 256, TextureFormat.RGBA32, false);
+            GetComponent<Camera>().Render();
+            RenderTexture.active = rt;
+            screenShot.ReadPixels(new Rect(0, 0, 256, 256), 0, 0);
+            GetComponent<Camera>().targetTexture = null;
+            RenderTexture.active = null;
+
+            if (Application.isEditor)
+            {
+                DestroyImmediate(rt);
+            }
+            else
+            {
+                Destroy(rt);
+            }
+
+            byte[] bytes = screenShot.EncodeToPNG();
+            System.IO.File.WriteAllBytes(fullPath, bytes);
+            AssetDatabase.Refresh();
+    }
+
+    private IEnumerator Screenshot()
+    {
+        for (int i = 0; i < sceneObjects.count; i++)
+        {
+            GameObject obj = sceneObjects[i];
+            InventoryItemData data = dataObjects[i];
+
+            obj.GameObject.SetActive(true);
+
+            yield return null;
+
+            TakeScreenshot($"{Application.dataPath}/{pathFolder}/{data.id}_Icon.png");
+
+            yield return null;
+            obj.GameObject.SetActive(false);
+
+            Sprite s = AssetDatabase.LoadAssetAtPath<Sprite>($"Assets/{pathFolder}/{data.id}_Icon.png");
+            if (s != null)
+            {
+                data.icon = s;
+                EditorUtility.SetDirty(data);
+            }
+
+            yield return null;
+        }
     }
 }
