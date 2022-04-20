@@ -62,7 +62,7 @@ public class GameEnding : MonoBehaviour
 
     void SetClue3Text()
     {
-        clue3Text.text "Whispers beckon/nTis' too late I reckon/nNo return/nDo you feel the burn/nOpen the gates of hell/nWelcome, things are just swell";
+        clue3Text.text = "Whispers beckon/nTis' too late I reckon/nNo return/nDo you feel the burn/nOpen the gates of hell/nWelcome, things are just swell";
     }
 
     void SetWarningText()
