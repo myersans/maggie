@@ -11,6 +11,11 @@ public class GameEnding : MonoBehaviour
     public bool timerIsRunning = false;
     public TextMeshProUGUI timeText;
 
+    public TextMeshProUGUI clue1Text;
+    public TextMeshProUGUI clue2Text;
+    public TextMeshProUGUI clue3Text;
+    public TextMeshProUGUI warningText;
+
     private int keyCount;
 
     // Start is called before the first frame update
@@ -44,6 +49,26 @@ public class GameEnding : MonoBehaviour
 
     }
 
+    void SetClue1Text()
+    {
+        clue1Text.text = "Free Bird/nOver Yonder/nRejoice in your Flight/nThe wind, your palace"
+    }
+
+    void SetClue2Text()
+    {
+     clue2Text.text = "Calm waves/nRoaring sea/nAbrupt End/nCastaway/nKissed by the scorching sun"
+    }
+
+    void SetClue3Text()
+    {
+        clue3Text.text "Whispers beckon/nTis' too late I reckon/nNo return/nDo you feel the burn/nOpen the gates of hell/nWelcome, things are just swell"
+    }
+
+    void SetWarningText()
+    {
+        warningText.text = "You need the key if you wish to flee!"
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         switch(other.gameObject.tag)
@@ -69,6 +94,15 @@ public class GameEnding : MonoBehaviour
                 {
                     other.gameObject.SetActive(false);
                 }
+
+            case "Clue1":
+                SetClue1Text()
+
+            case "Clue2":
+                SetClue2Text()
+
+            case "Clue3":
+                SetClue3Text()
         }
     }
 }

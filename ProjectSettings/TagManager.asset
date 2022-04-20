@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Key
+  - Door1
+  - Door2
+  - Door3
+  - Clue1
+  - Clue2
+  - Clue3
   layers:
   - Default
   - TransparentFX
