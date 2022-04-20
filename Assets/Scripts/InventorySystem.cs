@@ -6,6 +6,19 @@ public class InventorySystem : MonoBehaviour
 {
     private Dictionary<InventoryItemData, InventoryItem> m_itemDictionary;
     public List<InventoryItem> inventory { get; private set; }
+    static public InventorySystem current;
+
+    public void Start()
+    {
+        if (current == null)
+        {
+            current = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
     
     private void Awake()
     {

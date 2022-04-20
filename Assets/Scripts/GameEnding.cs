@@ -83,45 +83,55 @@ public class GameEnding : MonoBehaviour
                 other.gameObject.SetActive(false);
                 keyCount = keyCount - 1;
                 SetKeyFoundText();
+                break;
 
             case "Door1":
-                if (keyCount = 2)
+                if (keyCount == 2)
                 {
                     other.gameObject.SetActive(false);
+                    break;
                 }
                 else
                 {
                     SetWarningText();
+                    break;
                 }
 
             case "Door2":
-                if (keyCount = 1)
+                if (keyCount == 1)
                 {
                     other.gameObject.SetActive(false);
+                    break;
                 }
                 else
                 {
                     SetWarningText();
+                    break;
                 }
 
             case "Door3":
-                if (keyCount = 0)
+                if (keyCount == 0)
                 {
                     other.gameObject.SetActive(false);
+                    break;
                 }
                 else
                 {
                     SetWarningText();
+                    break;
                 }
 
             case "Clue1":
                 SetClue1Text();
+                break;
 
             case "Clue2":
                 SetClue2Text();
+                break;
 
             case "Clue3":
                 SetClue3Text();
+                break;
         }
     }
 }

@@ -312,6 +312,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a0cbaa80e5af9f4d9a1584da29fa828, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneObjects: []
+  dataObjects: []
+  pathFolder: Icons
 --- !u!1001 &2040516165
 PrefabInstance:
   m_ObjectHideFlags: 0

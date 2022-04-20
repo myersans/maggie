@@ -1,12 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using UnityEditor;
 
-public class Screenshot : MonoBehaviour
+
+public class ScreenshotUtility : MonoBehaviour
 {
 
     public List<GameObject> sceneObjects;
     public List<InventoryItemData> dataObjects;
+
+    private Camera camera;
+    public string pathFolder;
 
     private void Awake()
     {
@@ -51,19 +57,19 @@ public class Screenshot : MonoBehaviour
 
     private IEnumerator Screenshot()
     {
-        for (int i = 0; i < sceneObjects.count; i++)
+        for (int i = 0; i < sceneObjects.Count; i++)
         {
             GameObject obj = sceneObjects[i];
             InventoryItemData data = dataObjects[i];
 
-            obj.GameObject.SetActive(true);
+            obj.gameObject.SetActive(true);
 
             yield return null;
 
             TakeScreenshot($"{Application.dataPath}/{pathFolder}/{data.id}_Icon.png");
 
             yield return null;
-            obj.GameObject.SetActive(false);
+            obj.gameObject.SetActive(false);
 
             Sprite s = AssetDatabase.LoadAssetAtPath<Sprite>($"Assets/{pathFolder}/{data.id}_Icon.png");
             if (s != null)
