@@ -15,6 +15,7 @@ public class GameEnding : MonoBehaviour
     public TextMeshProUGUI clue2Text;
     public TextMeshProUGUI clue3Text;
     public TextMeshProUGUI warningText;
+    public TextMeshProUGUI keyFoundText;
 
     private int keyCount;
 
@@ -51,22 +52,27 @@ public class GameEnding : MonoBehaviour
 
     void SetClue1Text()
     {
-        clue1Text.text = "Free Bird/nOver Yonder/nRejoice in your Flight/nThe wind, your palace"
+        clue1Text.text = "Free Bird/nOver Yonder/nRejoice in your Flight/nThe wind, your palace";
     }
 
     void SetClue2Text()
     {
-     clue2Text.text = "Calm waves/nRoaring sea/nAbrupt End/nCastaway/nKissed by the scorching sun"
+        clue2Text.text = "Calm waves/nRoaring sea/nAbrupt End/nCastaway/nKissed by the scorching sun";
     }
 
     void SetClue3Text()
     {
-        clue3Text.text "Whispers beckon/nTis' too late I reckon/nNo return/nDo you feel the burn/nOpen the gates of hell/nWelcome, things are just swell"
+        clue3Text.text "Whispers beckon/nTis' too late I reckon/nNo return/nDo you feel the burn/nOpen the gates of hell/nWelcome, things are just swell";
     }
 
     void SetWarningText()
     {
-        warningText.text = "You need the key if you wish to flee!"
+        warningText.text = "You need the key if you wish to flee!";
+    }
+
+    void SetKeyFoundText()
+    {
+        keyFoundText.text = "Key Found! Hurry to the next room!";
     }
 
     private void OnTriggerEnter(Collider other)
@@ -76,11 +82,16 @@ public class GameEnding : MonoBehaviour
             case "Key":
                 other.gameObject.SetActive(false);
                 keyCount = keyCount - 1;
+                SetKeyFoundText();
 
             case "Door1":
                 if (keyCount = 2)
                 {
                     other.gameObject.SetActive(false);
+                }
+                else
+                {
+                    SetWarningText();
                 }
 
             case "Door2":
@@ -88,21 +99,29 @@ public class GameEnding : MonoBehaviour
                 {
                     other.gameObject.SetActive(false);
                 }
+                else
+                {
+                    SetWarningText();
+                }
 
             case "Door3":
                 if (keyCount = 0)
                 {
                     other.gameObject.SetActive(false);
                 }
+                else
+                {
+                    SetWarningText();
+                }
 
             case "Clue1":
-                SetClue1Text()
+                SetClue1Text();
 
             case "Clue2":
-                SetClue2Text()
+                SetClue2Text();
 
             case "Clue3":
-                SetClue3Text()
+                SetClue3Text();
         }
     }
 }
