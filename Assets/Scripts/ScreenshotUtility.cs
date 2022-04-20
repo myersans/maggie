@@ -13,6 +13,7 @@ public class ScreenshotUtility : MonoBehaviour
 
     private Camera camera;
     public string pathFolder;
+    public string prefix;
 
     private void Awake()
     {
@@ -59,6 +60,7 @@ public class ScreenshotUtility : MonoBehaviour
     {
         for (int i = 0; i < sceneObjects.Count; i++)
         {
+            print("Here");
             GameObject obj = sceneObjects[i];
             InventoryItemData data = dataObjects[i];
 
@@ -66,6 +68,7 @@ public class ScreenshotUtility : MonoBehaviour
 
             yield return null;
 
+            print("Here");
             TakeScreenshot($"{Application.dataPath}/{pathFolder}/{data.id}_Icon.png");
 
             yield return null;
