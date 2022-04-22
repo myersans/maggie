@@ -18,6 +18,15 @@ public class GameEnding : MonoBehaviour
     public TextMeshProUGUI keyFoundText;
 
     private int keyCount;
+    public CanvasGroup exitBackgroundImageCanvasGroup;
+    public AudioSource exitAudio;
+    public CanvasGroup caughtBackgroundImageCanvasGroup;
+    public AudioSource caughtAudio;
+    public float fadeDuration = 1f;
+    public float displayImageDuration = 1f;
+    public GameObject player;
+    bool m_HasAudioPlayed;
+    float m_Timer;
 
     // Start is called before the first frame update
     void Start()
@@ -48,6 +57,30 @@ public class GameEnding : MonoBehaviour
         float seconds = Mathf.FloorToInt(timeToDisplay % 60);
         timeText.text = "Time Remaining: " + string.Format("{0:00}:{1:00}", minutes, seconds);
 
+    }
+
+    void EndLevel(CanvasGroup imageCanvasGroup, bool doRestart, AudioSource audioSource)
+    {
+        if (!m_HasAudioPlayed)
+        {
+            audioSource.Play();
+            m_HasAudioPlayed = true;
+        }
+
+        m_Timer += Time.deltaTime;
+        imageCanvasGroup.alpha = m_Timer / fadeDuration;
+
+        if (m_Timer > fadeDuration + displayImageDuration)
+        {
+            if (doRestart)
+            {
+                SceneManager.LoadScene(1);
+            }
+            else
+            {
+                Application.Quit();
+            }
+        }
     }
 
     void SetClue1Text()
@@ -122,6 +155,7 @@ public class GameEnding : MonoBehaviour
                 }
 
             case "Clue1":
+                clue1Text.gameObject.SetActive(true);
                 SetClue1Text();
                 break;
 
