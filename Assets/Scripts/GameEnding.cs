@@ -52,7 +52,7 @@ public class GameEnding : MonoBehaviour
 
     void SetClue1Text()
     {
-        clue1Text.text = "Free Bird     Over Yonder     Rejoice in your Flight     The wind, your palace";
+        clue1Text.text = "Free Bird Over Yonder Rejoice in your flight The wind, your palace";
     }
 
     void SetClue2Text()
