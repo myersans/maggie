@@ -47,6 +47,17 @@ public class GameEnding : MonoBehaviour
                 timeRemaining -= Time.deltaTime;
                 DisplayTime(timeRemaining);
             }
+            else
+            {
+                if (keyCount == 0)
+                {
+                    EndLevel(exitBackgroundImageCanvasGroup, false, exitAudio);
+                }
+                else
+                {
+                    EndLevel(caughtBackgroundImageCanvasGroup, true, caughtAudio);
+                }
+            }
         }
     }
 
@@ -90,12 +101,12 @@ public class GameEnding : MonoBehaviour
 
     void SetClue2Text()
     {
-        clue2Text.text = "Calm waves/nRoaring sea/nAbrupt End/nCastaway/nKissed by the scorching sun";
+        clue2Text.text = "Calm waves Roaring sea Abrupt End Castaway Kissed by the scorching sun";
     }
 
     void SetClue3Text()
     {
-        clue3Text.text = "Whispers beckon/nTis' too late I reckon/nNo return/nDo you feel the burn/nOpen the gates of hell/nWelcome, things are just swell";
+        clue3Text.text = "Whispers beckon Tis' too late I reckon No return Do you feel the burn Open the gates of hell Welcome, things are just swell";
     }
 
     void SetWarningText()
@@ -115,6 +126,7 @@ public class GameEnding : MonoBehaviour
             case "Key":
                 other.gameObject.SetActive(false);
                 keyCount = keyCount - 1;
+                keyFoundText.gameObject.SetActive(true);
                 SetKeyFoundText();
                 break;
 
@@ -126,6 +138,7 @@ public class GameEnding : MonoBehaviour
                 }
                 else
                 {
+                    warningText.gameObject.SetActive(true);
                     SetWarningText();
                     break;
                 }
@@ -138,6 +151,7 @@ public class GameEnding : MonoBehaviour
                 }
                 else
                 {
+                    warningText.gameObject.SetActive(true);
                     SetWarningText();
                     break;
                 }
@@ -145,11 +159,12 @@ public class GameEnding : MonoBehaviour
             case "Door3":
                 if (keyCount == 0)
                 {
-                    other.gameObject.SetActive(false);
+                    EndLevel(exitBackgroundImageCanvasGroup, false, exitAudio);
                     break;
                 }
                 else
                 {
+                    warningText.gameObject.SetActive(true);
                     SetWarningText();
                     break;
                 }
@@ -160,11 +175,47 @@ public class GameEnding : MonoBehaviour
                 break;
 
             case "Clue2":
+                clue2Text.gameObject.SetActive(true);
                 SetClue2Text();
                 break;
 
             case "Clue3":
+                clue3Text.gameObject.SetActive(true);
                 SetClue3Text();
+                break;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        switch (other.gameObject.tag)
+        {
+            case "Key":
+                keyFoundText.gameObject.SetActive(false);
+                break;
+
+            case "Door1":
+                warningText.gameObject.SetActive(false);
+                break;
+
+            case "Door2":
+               warningText.gameObject.SetActive(false);
+               break;
+
+            case "Door3":
+                warningText.gameObject.SetActive(false);
+                break;
+
+            case "Clue1":
+                clue1Text.gameObject.SetActive(false);
+                break;
+
+            case "Clue2":
+                clue2Text.gameObject.SetActive(false);
+                break;
+
+            case "Clue3":
+                clue3Text.gameObject.SetActive(false);
                 break;
         }
     }
