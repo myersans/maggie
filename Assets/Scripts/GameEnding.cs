@@ -119,6 +119,15 @@ public class GameEnding : MonoBehaviour
         keyFoundText.text = "Key Found! Hurry to the next room!";
     }
 
+    void ResetText()
+    {
+        keyFoundText.gameObject.SetActive(false);
+        warningText.gameObject.SetActive(false);
+        clue1Text.gameObject.SetActive(false);
+        clue2Text.gameObject.SetActive(false);
+        clue3Text.gameObject.SetActive(false);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         switch(other.gameObject.tag)
@@ -128,6 +137,7 @@ public class GameEnding : MonoBehaviour
                 keyCount = keyCount - 1;
                 keyFoundText.gameObject.SetActive(true);
                 SetKeyFoundText();
+                Invoke("ResetText", 5);
                 break;
 
             case "Door1":
@@ -140,6 +150,7 @@ public class GameEnding : MonoBehaviour
                 {
                     warningText.gameObject.SetActive(true);
                     SetWarningText();
+                    Invoke("ResetText", 5);
                     break;
                 }
 
@@ -153,6 +164,7 @@ public class GameEnding : MonoBehaviour
                 {
                     warningText.gameObject.SetActive(true);
                     SetWarningText();
+                    Invoke("ResetText", 5);
                     break;
                 }
 
@@ -166,56 +178,26 @@ public class GameEnding : MonoBehaviour
                 {
                     warningText.gameObject.SetActive(true);
                     SetWarningText();
+                    Invoke("ResetText", 5);
                     break;
                 }
 
             case "Clue1":
                 clue1Text.gameObject.SetActive(true);
                 SetClue1Text();
+                Invoke("ResetText", 5);
                 break;
 
             case "Clue2":
                 clue2Text.gameObject.SetActive(true);
                 SetClue2Text();
+                Invoke("ResetText", 5);
                 break;
 
             case "Clue3":
                 clue3Text.gameObject.SetActive(true);
                 SetClue3Text();
-                break;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        switch (other.gameObject.tag)
-        {
-            case "Key":
-                keyFoundText.gameObject.SetActive(false);
-                break;
-
-            case "Door1":
-                warningText.gameObject.SetActive(false);
-                break;
-
-            case "Door2":
-               warningText.gameObject.SetActive(false);
-               break;
-
-            case "Door3":
-                warningText.gameObject.SetActive(false);
-                break;
-
-            case "Clue1":
-                clue1Text.gameObject.SetActive(false);
-                break;
-
-            case "Clue2":
-                clue2Text.gameObject.SetActive(false);
-                break;
-
-            case "Clue3":
-                clue3Text.gameObject.SetActive(false);
+                Invoke("ResetText", 5);
                 break;
         }
     }
