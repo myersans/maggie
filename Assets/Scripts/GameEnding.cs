@@ -18,6 +18,7 @@ public class GameEnding : MonoBehaviour
     public TextMeshProUGUI keyFoundText;
 
     private int keyCount;
+    public AudioSource pickupAudio;
     public CanvasGroup exitBackgroundImageCanvasGroup;
     public AudioSource exitAudio;
     public CanvasGroup caughtBackgroundImageCanvasGroup;
@@ -137,6 +138,7 @@ public class GameEnding : MonoBehaviour
                 keyCount = keyCount - 1;
                 keyFoundText.gameObject.SetActive(true);
                 SetKeyFoundText();
+                pickupAudio.Play();
                 Invoke("ResetText", 10);
                 break;
 
