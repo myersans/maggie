@@ -137,7 +137,7 @@ public class GameEnding : MonoBehaviour
                 keyCount = keyCount - 1;
                 keyFoundText.gameObject.SetActive(true);
                 SetKeyFoundText();
-                Invoke("ResetText", 5);
+                Invoke("ResetText", 10);
                 break;
 
             case "Door1":
@@ -150,7 +150,7 @@ public class GameEnding : MonoBehaviour
                 {
                     warningText.gameObject.SetActive(true);
                     SetWarningText();
-                    Invoke("ResetText", 5);
+                    Invoke("ResetText", 10);
                     break;
                 }
 
@@ -164,7 +164,7 @@ public class GameEnding : MonoBehaviour
                 {
                     warningText.gameObject.SetActive(true);
                     SetWarningText();
-                    Invoke("ResetText", 5);
+                    Invoke("ResetText", 10);
                     break;
                 }
 
@@ -178,26 +178,26 @@ public class GameEnding : MonoBehaviour
                 {
                     warningText.gameObject.SetActive(true);
                     SetWarningText();
-                    Invoke("ResetText", 5);
+                    Invoke("ResetText", 10);
                     break;
                 }
 
             case "Clue1":
                 clue1Text.gameObject.SetActive(true);
                 SetClue1Text();
-                Invoke("ResetText", 5);
+                Invoke("ResetText", 10);
                 break;
 
             case "Clue2":
                 clue2Text.gameObject.SetActive(true);
                 SetClue2Text();
-                Invoke("ResetText", 5);
+                Invoke("ResetText", 10);
                 break;
 
             case "Clue3":
                 clue3Text.gameObject.SetActive(true);
                 SetClue3Text();
-                Invoke("ResetText", 5);
+                Invoke("ResetText", 10);
                 break;
         }
     }
