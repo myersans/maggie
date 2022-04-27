@@ -11,6 +11,7 @@ TagManager:
   - Clue1
   - Clue2
   - Clue3
+  - Restart
   layers:
   - Default
   - TransparentFX

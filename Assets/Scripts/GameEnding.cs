@@ -29,6 +29,12 @@ public class GameEnding : MonoBehaviour
     bool m_HasAudioPlayed;
     float m_Timer;
 
+    public BoxCollider[] door1Colliders;
+    public BoxCollider[] door2Colliders;
+
+    private bool gameOver1 = false;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +47,10 @@ public class GameEnding : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (gameOver1 == true)
+        {
+            EndLevel(exitBackgroundImageCanvasGroup, false, exitAudio);
+        }
         if (timerIsRunning)
         {
             if (timeRemaining > 0)
@@ -81,7 +91,7 @@ public class GameEnding : MonoBehaviour
 
         m_Timer += Time.deltaTime;
         imageCanvasGroup.alpha = m_Timer / fadeDuration;
-
+        Debug.Log(m_Timer / fadeDuration);
         if (m_Timer > fadeDuration + displayImageDuration)
         {
             if (doRestart)
@@ -146,6 +156,7 @@ public class GameEnding : MonoBehaviour
                 if (keyCount == 2)
                 {
                     other.gameObject.SetActive(false);
+                    door1Colliders[0].enabled = false;
                     break;
                 }
                 else
@@ -160,6 +171,7 @@ public class GameEnding : MonoBehaviour
                 if (keyCount == 1)
                 {
                     other.gameObject.SetActive(false);
+                    door2Colliders[0].enabled = false;
                     break;
                 }
                 else
@@ -173,6 +185,7 @@ public class GameEnding : MonoBehaviour
             case "Door3":
                 if (keyCount == 0)
                 {
+                    gameOver1 = true;
                     EndLevel(exitBackgroundImageCanvasGroup, false, exitAudio);
                     break;
                 }
@@ -200,6 +213,10 @@ public class GameEnding : MonoBehaviour
                 clue3Text.gameObject.SetActive(true);
                 SetClue3Text();
                 Invoke("ResetText", 10);
+                break;
+
+            case "Restart":
+                SceneManager.LoadScene(0);
                 break;
         }
     }
