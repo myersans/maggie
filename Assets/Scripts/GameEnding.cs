@@ -31,6 +31,7 @@ public class GameEnding : MonoBehaviour
 
     public BoxCollider[] door1Colliders;
     public BoxCollider[] door2Colliders;
+    public BoxCollider[] door3Colliders;
 
     private bool gameOver1 = false;
 
@@ -91,7 +92,6 @@ public class GameEnding : MonoBehaviour
 
         m_Timer += Time.deltaTime;
         imageCanvasGroup.alpha = m_Timer / fadeDuration;
-        Debug.Log(m_Timer / fadeDuration);
         if (m_Timer > fadeDuration + displayImageDuration)
         {
             if (doRestart)
@@ -137,6 +137,11 @@ public class GameEnding : MonoBehaviour
         clue1Text.gameObject.SetActive(false);
         clue2Text.gameObject.SetActive(false);
         clue3Text.gameObject.SetActive(false);
+    }
+
+    void Menu()
+    {
+        SceneManager.LoadScene(0);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -186,7 +191,9 @@ public class GameEnding : MonoBehaviour
                 if (keyCount == 0)
                 {
                     gameOver1 = true;
+                    door3Colliders[0].enabled = false;
                     EndLevel(exitBackgroundImageCanvasGroup, false, exitAudio);
+                    Invoke("Menu", 6);
                     break;
                 }
                 else
